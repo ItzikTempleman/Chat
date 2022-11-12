@@ -1,10 +1,10 @@
-package com.example.whatssappmainactivitymock.navigation
+package com.example.whatssappmainactivitymock.project.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.whatssappmainactivitymock.composed_screens.*
+import com.example.whatssappmainactivitymock.project.composed_screens.*
 
 @Composable
 fun BottomNavGraph(navController: NavHostController) {

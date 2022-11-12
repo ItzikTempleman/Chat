@@ -14,7 +14,7 @@
         android:theme="@style/Theme.WhatssappMainActivityMock"
         tools:targetApi="33">
         <activity
-            android:name=".MainActivity"
+            android:name=".project.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.WhatssappMainActivityMock">

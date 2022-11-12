@@ -1,4 +1,4 @@
-package com.example.whatssappmainactivitymock.composed_screens
+package com.example.whatssappmainactivitymock.project.composed_screens
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing

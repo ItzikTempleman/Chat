@@ -1,13 +1,10 @@
-package com.example.whatssappmainactivitymock.navigation
+package com.example.whatssappmainactivitymock.project.navigation
 
 import android.annotation.SuppressLint
-import android.graphics.Color.red
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.*
-import androidx.compose.material.SnackbarDefaults.backgroundColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController

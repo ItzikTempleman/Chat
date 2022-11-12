@@ -1,4 +1,4 @@
-package com.example.whatssappmainactivitymock.composed_screens
+package com.example.whatssappmainactivitymock.project.composed_screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,13 +13,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.whatssappmainactivitymock.R
-import com.example.whatssappmainactivitymock.models.Chat
+import com.example.whatssappmainactivitymock.project.models.Chat
+import com.example.whatssappmainactivitymock.project.models.User
 
 @Composable
 fun ChatItemScreen(chat: Chat) {
     Column(modifier = Modifier.fillMaxSize()) {
         Text(
-            text = chat.name,
+            text = chat.name.firstName+ " "+chat.name.familyName,
             modifier = Modifier.padding(12.dp),
             textAlign = TextAlign.Start,
             color = colorResource(R.color.black),
@@ -39,11 +40,17 @@ fun ChatItemScreen(chat: Chat) {
 
 private val allChats: MutableList<Chat> = mutableListOf()
 private val filteredChatList: MutableList<Chat> = mutableListOf()
-private val chat1 = Chat("John", "Yeah i'm coming!")
-private val chat2 = Chat("Michael", "Don't tell")
-private val chat3 = Chat("Orel", "yes i am coming")
-private val chat4 = Chat("Steve", "My favorite..")
-private val chat5 = Chat("Itzik", "Yesterday he was ok")
+
+
+private val chat1 = Chat(User ("John", "Cohen"), "Yeah i'm coming!")
+private val chat2 = Chat(User("Michael", "Potter"), "Don't tell")
+private val chat3 = Chat(User("Orel", "Lev"), "yes i am coming")
+private val chat4 = Chat(User("Steve", "Gates"), "My favorite..")
+private val chat5 = Chat(User("Itzik", "Lasso"), "Yesterday he was ok")
+
+
+
+
 
 fun getAllChats(): MutableList<Chat> {
     allChats.add(chat1)

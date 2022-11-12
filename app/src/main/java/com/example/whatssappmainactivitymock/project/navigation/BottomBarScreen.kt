@@ -1,4 +1,4 @@
-package com.example.whatssappmainactivitymock.navigation
+package com.example.whatssappmainactivitymock.project.navigation
 
 import com.example.whatssappmainactivitymock.R
 
