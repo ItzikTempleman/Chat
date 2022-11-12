@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">WhatsAppMainActivityMock</string>
+    <string name="edit">Edit</string>
+    <string name="chats">Chats</string>
+    <string name="search">Search</string>
+
+    <string name="home">Home</string>
+    <string name="settings">Settings</string>
+    <string name="profile">Profile</string>
+    <string name="calls">Calls</string>
+    <string name="status">Status</string>
+    <string name="camera">Camera</string>
+</resources>
