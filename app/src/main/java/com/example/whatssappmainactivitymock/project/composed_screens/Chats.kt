@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterialApi::class)
+
 package com.example.whatssappmainactivitymock.project.composed_screens
 
 import androidx.compose.animation.core.Animatable
@@ -92,6 +94,7 @@ fun TopBar(title: String, currentRotation: Float) {
         }
 
 
+
         IconButton(onClick = {
             isChatClicked.value = true
         },
@@ -109,6 +112,8 @@ fun TopBar(title: String, currentRotation: Float) {
                 tint = colorResource(R.color.light_blue)
             )
         }
+
+        BottomSheetDialogPopUp(isChatClicked.value)
     }
 
 }
