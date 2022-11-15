@@ -28,19 +28,23 @@ val chats = getAllChats()
 val filteredChats = getFilteredChats()
 
 var isFiltered = mutableStateOf(false)
+var isChatClicked = mutableStateOf(false)
 var unfilteredColor = R.color.light_blue
 var filteredContentColor = R.color.blue
+
+
+
 @Composable
 fun ChatsScreen() {
 
     Column(modifier = Modifier.fillMaxSize()) {
-        RotateAnimation(isFiltered = isFiltered.value)
 
+        RotateAnimation(isFiltered = isFiltered.value)
         Title(title = stringResource(R.string.chats))
         SearchField(modifier = Modifier)
         Divider(Modifier.padding(horizontal = 12.dp), thickness = 0.33.dp, color = Color.Black)
-
         ChatListLazyColumn()
+
     }
 }
 
@@ -88,10 +92,9 @@ fun TopBar(title: String, currentRotation: Float) {
         }
 
 
-        Icon(
-            contentDescription = "create",
-            painter = painterResource(R.drawable.create),
-            tint = colorResource(R.color.light_blue),
+        IconButton(onClick = {
+            isChatClicked.value = true
+        },
             modifier = Modifier
                 .padding(12.dp)
                 .size(24.dp)
@@ -99,9 +102,17 @@ fun TopBar(title: String, currentRotation: Float) {
                     top.linkTo(parent.top)
                     end.linkTo(parent.end)
                 }
-        )
+        ) {
+            Icon(
+                contentDescription = "create",
+                painter = painterResource(R.drawable.create),
+                tint = colorResource(R.color.light_blue)
+            )
+        }
     }
+
 }
+
 
 @Composable
 fun Title(title: String, modifier: Modifier = Modifier) {
@@ -184,5 +195,9 @@ fun RotateAnimation(isFiltered: Boolean) {
     }
     TopBar(title = stringResource(R.string.edit), currentRotation)
 }
+
+
+
+
 
 

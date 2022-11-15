@@ -8,6 +8,7 @@ import com.example.whatssappmainactivitymock.theme.WhatssappMainActivityMockThem
 
 class MainActivity : ComponentActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
