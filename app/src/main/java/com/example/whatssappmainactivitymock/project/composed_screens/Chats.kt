@@ -25,10 +25,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.whatssappmainactivitymock.R
+import com.example.whatssappmainactivitymock.project.navigation.ShowNavBar
 
 val chats = getAllChats()
 val filteredChats = getFilteredChats()
 
+var isNavShowing = mutableStateOf(true)
 var isFiltered = mutableStateOf(false)
 var isChatClicked = mutableStateOf(false)
 var unfilteredColor = R.color.light_blue
@@ -75,6 +77,7 @@ fun TopBar(title: String, currentRotation: Float) {
 
         IconButton(onClick = {
             isFiltered.value = !isFiltered.value
+
         },
             modifier = Modifier
                 .rotate(currentRotation)
@@ -97,6 +100,7 @@ fun TopBar(title: String, currentRotation: Float) {
 
         IconButton(onClick = {
             isChatClicked.value = true
+            isNavShowing.value = false
         },
             modifier = Modifier
                 .padding(12.dp)
@@ -114,9 +118,11 @@ fun TopBar(title: String, currentRotation: Float) {
         }
 
         BottomSheetDialogPopUp(isChatClicked.value)
+        ShowNavBar(isNavShowing)
     }
 
 }
+
 
 
 @Composable

@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
@@ -15,18 +17,22 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.whatssappmainactivitymock.R
 
+var isNavVisible = mutableStateOf(true)
+
+@Composable
+fun ShowNavBar(navStatus: MutableState<Boolean>) {
+    isNavVisible = navStatus
+}
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MainScreen() {
-    val navController = rememberNavController()
-    Scaffold(
-        bottomBar = {
-            BottomBar(navController = navController)
+    if (isNavVisible.value) {
+        val navController = rememberNavController()
+        Scaffold(bottomBar = { BottomBar(navController) }) {
+            BottomNavGraph(navController)
         }
-    ) {
-        BottomNavGraph(navController = navController)
     }
 }
 
@@ -58,12 +64,7 @@ fun BottomBar(navController: NavController) {
 }
 
 @Composable
-fun RowScope.AddItem(
-
-    screen: BottomBarScreen,
-    currentDestination: NavDestination?,
-    navController: NavHostController
-) {
+fun RowScope.AddItem(screen: BottomBarScreen, currentDestination: NavDestination?, navController: NavHostController) {
 
     BottomNavigationItem(
 

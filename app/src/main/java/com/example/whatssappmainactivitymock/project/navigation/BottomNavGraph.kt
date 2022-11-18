@@ -8,10 +8,8 @@ import com.example.whatssappmainactivitymock.project.composed_screens.*
 
 @Composable
 fun BottomNavGraph(navController: NavHostController) {
-    NavHost(
-        navController = navController,
-        startDestination = BottomBarScreen.Status.route
-    ) {
+    NavHost(navController,BottomBarScreen.Status.route) {
+
         composable(route = BottomBarScreen.Status.route) {
             StatusScreen()
         }
