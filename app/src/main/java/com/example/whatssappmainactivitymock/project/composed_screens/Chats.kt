@@ -21,6 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -44,7 +45,12 @@ fun ChatsScreen() {
     Column(modifier = Modifier.fillMaxSize()) {
 
         RotateAnimation(isFiltered = isFiltered.value)
-        Title(title = stringResource(R.string.chats))
+        Title(
+            title = stringResource(R.string.chats),
+            textAlignment = TextAlign.Start,
+            arrangement = Arrangement.Start,
+            textSize = 36.sp
+        )
         SearchField(modifier = Modifier)
         Divider(Modifier.padding(horizontal = 12.dp), thickness = 0.33.dp, color = Color.Black)
         ChatListLazyColumn()
@@ -124,20 +130,26 @@ fun TopBar(title: String, currentRotation: Float) {
 }
 
 
-
 @Composable
-fun Title(title: String, modifier: Modifier = Modifier) {
-    Row(horizontalArrangement = Arrangement.Start, modifier = Modifier.fillMaxWidth()) {
+fun Title(
+    title: String,
+    modifier: Modifier = Modifier,
+    textAlignment: TextAlign,
+    arrangement: Arrangement.Horizontal,
+    textSize: TextUnit
+) {
+    Row(horizontalArrangement = arrangement, modifier = Modifier.fillMaxWidth()) {
         Text(
             text = title,
             modifier = modifier.padding(horizontal = 12.dp),
-            textAlign = TextAlign.Start,
+            textAlign = textAlignment,
             color = colorResource(R.color.black),
-            fontSize = 36.sp,
-            fontWeight = FontWeight.Bold
+            fontSize = textSize,
+            fontWeight = FontWeight.Normal
         )
     }
 }
+
 
 @Composable
 fun SearchField(modifier: Modifier = Modifier) {
@@ -175,6 +187,16 @@ fun ChatListLazyColumn() {
     LazyColumn(modifier = Modifier.fillMaxHeight()) {
         items(items = if (isFiltered.value) filteredChats else chats, itemContent = {
             ChatItemScreen(it)
+        })
+    }
+}
+
+
+@Composable
+fun ContactListLazyColumn() {
+    LazyColumn(modifier = Modifier.fillMaxHeight()) {
+        items(items = usersForNewChatList, itemContent = {
+            ChooseContact(it)
         })
     }
 }

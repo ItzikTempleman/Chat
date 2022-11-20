@@ -37,16 +37,23 @@ fun ChatItemScreen(chat: Chat) {
     }
 }
 
-
+private val allUsers: MutableList<User> = mutableListOf()
 private val allChats: MutableList<Chat> = mutableListOf()
 private val filteredChatList: MutableList<Chat> = mutableListOf()
 
 
-private val chat1 = Chat(User ("John", "Cohen"), "Yeah i'm coming!")
-private val chat2 = Chat(User("Michael", "Potter"), "Don't tell")
-private val chat3 = Chat(User("Orel", "Lev"), "yes i am coming")
-private val chat4 = Chat(User("Steve", "Gates"), "My favorite..")
-private val chat5 = Chat(User("Itzik", "Lasso"), "Yesterday he was ok")
+private val user1 = User ("John", "Cohen")
+private val user2 = User("Michael", "Potter")
+private val user3 = User ("Orel", "Lev")
+private val user4 =User("Steve", "Gates")
+private val user5 = User("Itzik", "Lasso")
+
+
+private val chat1 = Chat(user1, "Yeah i'm coming!")
+private val chat2 = Chat(user2, "Don't tell")
+private val chat3 = Chat(user3, "yes i am coming")
+private val chat4 = Chat(user4, "My favorite..")
+private val chat5 = Chat(user5, "Yesterday he was ok")
 
 
 
@@ -65,4 +72,13 @@ fun getFilteredChats(): MutableList<Chat> {
     filteredChatList.add(chat5)
     filteredChatList.add(chat3)
     return filteredChatList
+}
+
+fun getUsersForNewChatList(): MutableList<User> {
+    allUsers.add(user1)
+    allUsers.add(user2)
+    allUsers.add(user3)
+    allUsers.add(user4)
+    allUsers.add(user5)
+    return allUsers
 }
