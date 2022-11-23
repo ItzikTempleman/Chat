@@ -2,6 +2,9 @@
 
 package com.example.whatssappmainactivitymock.project.composed_screens
 
+
+import android.util.Log
+import android.view.animation.RotateAnimation
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
@@ -9,16 +12,18 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
@@ -28,83 +33,60 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.whatssappmainactivitymock.R
 import com.example.whatssappmainactivitymock.project.navigation.ShowNavBar
 
+
 val chats = getAllChats()
 val filteredChats = getFilteredChats()
+
 
 var isNavShowing = mutableStateOf(true)
 var isFiltered = mutableStateOf(false)
 var isChatClicked = mutableStateOf(false)
-var unfilteredColor = R.color.light_blue
-var filteredContentColor = R.color.blue
+
 
 
 
 @Composable
 fun ChatsScreen() {
-
     Column(modifier = Modifier.fillMaxSize()) {
-
         RotateAnimation(isFiltered = isFiltered.value)
-        Title(
-            title = stringResource(R.string.chats),
+        Title(title = stringResource(R.string.chats),
             textAlignment = TextAlign.Start,
             arrangement = Arrangement.Start,
-            textSize = 36.sp
-        )
+            textSize = 36.sp)
         SearchField(modifier = Modifier)
-        Divider(Modifier.padding(horizontal = 12.dp), thickness = 0.33.dp, color = Color.Black)
+        BroadcastListAndNewGroup()
+        Divider(Modifier, thickness = 0.75.dp, color = colorResource(R.color.lighter_grey))
         ChatListLazyColumn()
-
     }
 }
 
 
 @Composable
-fun TopBar(title: String, currentRotation: Float) {
-
+fun TopBar(title: String) {
     ConstraintLayout(
         modifier = Modifier.fillMaxWidth()
     ) {
 
-        val (editText, filterIcon, createButton) = createRefs()
-
-        Text(
-            text = title,
+        val (headerText, createButton, cameraIcon) = createRefs()
+        ClickableText(
             modifier = Modifier
                 .padding(12.dp)
-                .constrainAs(editText) {
+                .constrainAs(headerText) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
                 },
-            textAlign = TextAlign.Start,
-            color = colorResource(R.color.light_blue),
-            fontSize = 20.sp
+            style = TextStyle(
+                fontSize = 20.sp,
+                color = colorResource(id = R.color.light_blue)
+            ),
+            text = AnnotatedString(title),
+            onClick = {
+                editChatScreen()
+            }
         )
 
         IconButton(onClick = {
-            isFiltered.value = !isFiltered.value
 
-        },
-            modifier = Modifier
-                .rotate(currentRotation)
-                .padding(12.dp)
-                .size(24.dp)
-                .constrainAs(filterIcon) {
-                    top.linkTo(parent.top)
-                    end.linkTo(createButton.start)
-                }
-        ) {
-            Icon(
-                contentDescription = "filter",
-                painter = painterResource(R.drawable.filter),
-                tint = colorResource(if (isFiltered.value) filteredContentColor else unfilteredColor),
-
-                )
-        }
-
-
-
-        IconButton(onClick = {
             isChatClicked.value = true
             isNavShowing.value = false
         },
@@ -123,6 +105,27 @@ fun TopBar(title: String, currentRotation: Float) {
             )
         }
 
+
+
+
+        IconButton(onClick = {
+            openCamera()
+        },
+            modifier = Modifier
+                .padding(9.dp)
+                .size(30.dp)
+                .constrainAs(cameraIcon) {
+                    top.linkTo(parent.top)
+                    end.linkTo(createButton.start)
+                }
+        ) {
+            Icon(
+                contentDescription = "camera",
+                painter = painterResource(R.drawable.camera),
+                tint = colorResource(R.color.light_blue)
+            )
+        }
+
         BottomSheetDialogPopUp(isChatClicked.value)
         ShowNavBar(isNavShowing)
     }
@@ -136,50 +139,120 @@ fun Title(
     modifier: Modifier = Modifier,
     textAlignment: TextAlign,
     arrangement: Arrangement.Horizontal,
-    textSize: TextUnit
+    textSize: TextUnit,
 ) {
     Row(horizontalArrangement = arrangement, modifier = Modifier.fillMaxWidth()) {
+
         Text(
             text = title,
             modifier = modifier.padding(horizontal = 12.dp),
             textAlign = textAlignment,
             color = colorResource(R.color.black),
             fontSize = textSize,
-            fontWeight = FontWeight.Normal
+            fontWeight = FontWeight.Bold
         )
+    }
+}
+
+@Composable
+fun SearchField(modifier: Modifier = Modifier) {
+    ConstraintLayout(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        val (filterIcon, textField) = createRefs()
+
+
+        val textColor = colorResource(R.color.lighter_grey)
+        var text by remember { mutableStateOf("") }
+
+        TextField(
+            modifier = modifier
+                .fillMaxWidth()
+                .height(70.dp)
+                .padding(
+                    start = 54.dp,
+                    bottom = 20.dp
+                )
+                .constrainAs(textField) {
+                    end.linkTo(filterIcon.start)
+                },
+            value = text,
+            onValueChange = { text = it },
+            label = { Text(stringResource(R.string.search)) },
+            leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "search") },
+
+            colors = TextFieldDefaults.textFieldColors(
+                unfocusedLabelColor = textColor,
+                focusedLabelColor = textColor,
+                cursorColor = textColor,
+                textColor = textColor,
+                leadingIconColor = textColor,
+                backgroundColor = colorResource(R.color.light_grey),
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent
+            ),
+            shape = RoundedCornerShape(12.dp)
+        )
+
+        IconButton(onClick = {
+            isFiltered.value = !isFiltered.value
+        },
+            modifier = Modifier
+                .size(44.dp)
+                .padding(
+                    bottom = 20.dp
+                )
+                .constrainAs(filterIcon) {
+                    top.linkTo(textField.top)
+
+                    end.linkTo(parent.end)
+                    bottom.linkTo(textField.bottom)
+                }
+        ) {
+            Icon(
+                painter = painterResource(if (!isFiltered.value) R.drawable.filtered_inner_shape else R.drawable.filter),
+                contentDescription = "filter",
+                tint = colorResource(R.color.light_blue)
+            )
+        }
+
+
     }
 }
 
 
 @Composable
-fun SearchField(modifier: Modifier = Modifier) {
-    val textColor = colorResource(R.color.black)
-    var text by remember { mutableStateOf("") }
+fun BroadcastListAndNewGroup() {
+    Row(modifier = Modifier
+        .fillMaxWidth()
+        .padding(horizontal = 12.dp)
 
-    TextField(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(8.dp)
-            .height(45.dp),
-        value = text,
-        onValueChange = { text = it },
-        label = { Text(stringResource(R.string.search)) },
-        leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "search") },
+    ) {
 
-        colors = TextFieldDefaults.textFieldColors(
-            unfocusedLabelColor = textColor,
-            focusedLabelColor = textColor,
-            cursorColor = textColor,
-            textColor = textColor,
-            leadingIconColor = textColor,
-            backgroundColor = textColor.copy(
-                TextFieldDefaults.BackgroundOpacity
+        ClickableText(
+            
+            style = TextStyle(
+                fontSize = 20.sp,
+                color = colorResource(id = R.color.light_blue)
             ),
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent
-        ),
-        shape = RoundedCornerShape(12.dp)
-    )
+            text = AnnotatedString(stringResource(R.string.broadcast_lists)),
+            onClick = {
+                moveToBroadCastList()
+            }
+        )
+
+        ClickableText(
+            style = TextStyle(
+                fontSize = 20.sp,
+                color = colorResource(id = R.color.light_blue)
+            ),
+            text = AnnotatedString(stringResource(R.string.new_group)),
+            onClick = {
+               createNewGroup()
+            }
+        )
+
+    }
 }
 
 @Composable
@@ -190,7 +263,6 @@ fun ChatListLazyColumn() {
         })
     }
 }
-
 
 @Composable
 fun ContactListLazyColumn() {
@@ -205,7 +277,6 @@ fun ContactListLazyColumn() {
 fun RotateAnimation(isFiltered: Boolean) {
     var currentRotation by remember { mutableStateOf(0f) }
     val rotation = remember { Animatable(currentRotation) }
-
     LaunchedEffect(isFiltered) {
 
         if (isFiltered) {
@@ -226,8 +297,28 @@ fun RotateAnimation(isFiltered: Boolean) {
             }
         }
     }
-    TopBar(title = stringResource(R.string.edit), currentRotation)
+    TopBar(title = stringResource(R.string.edit))
 }
+
+fun createNewGroup() {
+
+}
+
+fun moveToBroadCastList() {
+
+}
+
+
+fun openCamera() {
+
+}
+
+fun editChatScreen() {
+
+}
+
+
+
 
 
 

@@ -10,5 +10,8 @@
     <string name="calls">Calls</string>
     <string name="status">Status</string>
     <string name="camera">Camera</string>
+    <string name="communities"> Communities</string>
     <string name="new_chat">New Chat</string>
+    <string name="broadcast_lists">Broadcast Lists</string>
+    <string name="new_group">New Group</string>
 </resources>

@@ -17,8 +17,8 @@ fun BottomNavGraph(navController: NavHostController) {
             CallsScreen()
         }
 
-        composable(route = BottomBarScreen.Camera.route) {
-            CameraScreen()
+        composable(route = BottomBarScreen.Communities.route) {
+            CommunityScreen()
         }
         composable(route = BottomBarScreen.Chats.route) {
             ChatsScreen()

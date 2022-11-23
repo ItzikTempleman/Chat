@@ -20,10 +20,10 @@ sealed class BottomBarScreen(
         icon = R.drawable.calls
     )
 
-    object Camera : BottomBarScreen(
-        route = "camera",
-        title = "Camera",
-        icon = R.drawable.camera
+    object Communities : BottomBarScreen(
+        route = "communities",
+        title = "Communities",
+        icon = R.drawable.communities
     )
 
     object Chats : BottomBarScreen(

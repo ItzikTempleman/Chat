@@ -21,6 +21,7 @@
     <color name="full_transparent">#00EAEAEA</color>
     <color name="transparent">#17EAEAEA</color>
     <color name="grey">#454545</color>
+    <color name="lighter_grey">#A8A7A7</color>
     <color name="light_grey">#EAEAEA</color>
     <color name="strong_yellow">#FFA200</color>
     <color name="light_red">#FF837A</color>

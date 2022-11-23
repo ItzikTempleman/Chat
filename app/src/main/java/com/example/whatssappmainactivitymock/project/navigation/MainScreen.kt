@@ -2,13 +2,17 @@ package com.example.whatssappmainactivitymock.project.navigation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -41,7 +45,7 @@ fun BottomBar(navController: NavController) {
     val screens = listOf(
         BottomBarScreen.Status,
         BottomBarScreen.Calls,
-        BottomBarScreen.Camera,
+        BottomBarScreen.Communities,
         BottomBarScreen.Chats,
         BottomBarScreen.Settings,
     )
@@ -69,7 +73,10 @@ fun RowScope.AddItem(screen: BottomBarScreen, currentDestination: NavDestination
     BottomNavigationItem(
 
         label = {
-            Text(text = screen.title)
+            Text(
+                text = screen.title,
+                fontSize = 9.sp
+            )
         },
 
         selectedContentColor = colorResource(R.color.toolbar_blue),
@@ -77,17 +84,17 @@ fun RowScope.AddItem(screen: BottomBarScreen, currentDestination: NavDestination
         icon = {
 
             Icon(
-
-
+                modifier = Modifier.size(32.dp),
                 painter = painterResource(screen.icon),
 
                 contentDescription = "Navigation Icon"
             )
         },
+
         selected = currentDestination?.hierarchy?.any {
             it.route == screen.route
         } == true,
-      // unselectedContentColor = LocalContentColor.current.copy(alpha = ContentAlpha.disabled),
+
         unselectedContentColor = colorResource(R.color.grey),
         onClick = {
 
