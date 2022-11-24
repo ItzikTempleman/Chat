@@ -13,7 +13,7 @@ import com.example.whatssappmainactivitymock.R
 @Composable
 fun SettingsScreen() {
     Column(modifier = Modifier.fillMaxSize()) {
-        Title(title = stringResource(R.string.settings),
+        TitleBar(title = stringResource(R.string.settings),
             textAlignment = TextAlign.Start,
             arrangement = Arrangement.Start,
             textSize = 36.sp

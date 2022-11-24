@@ -3,14 +3,13 @@
 package com.example.whatssappmainactivitymock.project.composed_screens
 
 
-import android.util.Log
-import android.view.animation.RotateAnimation
-import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.tween
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.*
@@ -47,19 +46,70 @@ var isChatClicked = mutableStateOf(false)
 
 @Composable
 fun ChatsScreen() {
-    Column(modifier = Modifier.fillMaxSize()) {
-        RotateAnimation(isFiltered = isFiltered.value)
-        Title(title = stringResource(R.string.chats),
+    val scrollState = rememberScrollState()
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .scrollable(state = scrollState, orientation = Orientation.Vertical)) {
+        TopBar(title = stringResource(R.string.edit))
+        TitleBar(title = stringResource(R.string.chats),
             textAlignment = TextAlign.Start,
             arrangement = Arrangement.Start,
             textSize = 36.sp)
-        SearchField(modifier = Modifier)
+        SearchField()
         BroadcastListAndNewGroup()
-        Divider(Modifier, thickness = 0.75.dp, color = colorResource(R.color.lighter_grey))
+        ArchivedChats()
         ChatListLazyColumn()
+        BottomSheetDialogPopUp(isChatClicked.value)
+        ShowNavBar(isNavShowing)
     }
 }
 
+@Composable
+fun ArchivedChats() {
+
+    ConstraintLayout(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(6.dp)
+            .clickable {
+                moveToArchiveChats()
+            }
+    )
+
+
+    {
+        val (archiveBtn, archivedText, divider) = createRefs()
+        Icon(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .constrainAs(archiveBtn) {
+                    top.linkTo(parent.top)
+                    start.linkTo(parent.start)
+                },
+            contentDescription = "archive",
+            painter = painterResource(id = R.drawable.archived),
+            tint = colorResource(id = R.color.lighter_grey)
+        )
+        Text(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .constrainAs(archivedText) {
+                    top.linkTo(parent.top)
+                    start.linkTo(archiveBtn.end)
+                },
+            text = stringResource(id = R.string.archived),
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold
+        )
+        Divider(Modifier
+            .padding(start = 80.dp)
+            .constrainAs(divider) {
+                top.linkTo(archivedText.bottom)
+                start.linkTo(parent.start)
+                end.linkTo(parent.end)
+            }, thickness = 0.5.dp, color = colorResource(R.color.lighter_grey))
+    }
+}
 
 @Composable
 fun TopBar(title: String) {
@@ -126,15 +176,13 @@ fun TopBar(title: String) {
             )
         }
 
-        BottomSheetDialogPopUp(isChatClicked.value)
-        ShowNavBar(isNavShowing)
     }
 
 }
 
 
 @Composable
-fun Title(
+fun TitleBar(
     title: String,
     modifier: Modifier = Modifier,
     textAlignment: TextAlign,
@@ -155,7 +203,7 @@ fun Title(
 }
 
 @Composable
-fun SearchField(modifier: Modifier = Modifier) {
+fun SearchField() {
     ConstraintLayout(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -166,7 +214,7 @@ fun SearchField(modifier: Modifier = Modifier) {
         var text by remember { mutableStateOf("") }
 
         TextField(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .height(70.dp)
                 .padding(
@@ -223,14 +271,19 @@ fun SearchField(modifier: Modifier = Modifier) {
 
 @Composable
 fun BroadcastListAndNewGroup() {
-    Row(modifier = Modifier
-        .fillMaxWidth()
-        .padding(horizontal = 12.dp)
-
+    ConstraintLayout(
+        modifier = Modifier.fillMaxWidth()
     ) {
 
+        val (broadcastList, newGroup, dividerLine) = createRefs()
+
         ClickableText(
-            
+            modifier = Modifier
+                .padding(12.dp)
+                .constrainAs(broadcastList) {
+                    top.linkTo(parent.top)
+                    start.linkTo(parent.start)
+                },
             style = TextStyle(
                 fontSize = 20.sp,
                 color = colorResource(id = R.color.light_blue)
@@ -238,20 +291,31 @@ fun BroadcastListAndNewGroup() {
             text = AnnotatedString(stringResource(R.string.broadcast_lists)),
             onClick = {
                 moveToBroadCastList()
-            }
-        )
+            },
+
+            )
 
         ClickableText(
+            modifier = Modifier
+                .padding(12.dp)
+                .constrainAs(newGroup) {
+                    top.linkTo(parent.top)
+                    end.linkTo(parent.end)
+                },
             style = TextStyle(
                 fontSize = 20.sp,
                 color = colorResource(id = R.color.light_blue)
             ),
             text = AnnotatedString(stringResource(R.string.new_group)),
             onClick = {
-               createNewGroup()
+                createNewGroup()
             }
         )
-
+        Divider(Modifier.constrainAs(dividerLine) {
+            top.linkTo(newGroup.bottom)
+            start.linkTo(parent.start)
+            end.linkTo(parent.end)
+        }, thickness = 0.75.dp, color = colorResource(R.color.lighter_grey))
     }
 }
 
@@ -273,33 +337,6 @@ fun ContactListLazyColumn() {
     }
 }
 
-@Composable
-fun RotateAnimation(isFiltered: Boolean) {
-    var currentRotation by remember { mutableStateOf(0f) }
-    val rotation = remember { Animatable(currentRotation) }
-    LaunchedEffect(isFiltered) {
-
-        if (isFiltered) {
-            rotation.animateTo(
-                targetValue = currentRotation + 180F,
-                animationSpec = tween(300, easing = LinearEasing)
-            ) {
-                currentRotation = value
-            }
-        } else {
-            if (currentRotation > 0) {
-                rotation.animateTo(
-                    targetValue = currentRotation - 180F,
-                    animationSpec = tween(300, easing = LinearEasing)
-                ) {
-                    currentRotation = value
-                }
-            }
-        }
-    }
-    TopBar(title = stringResource(R.string.edit))
-}
-
 fun createNewGroup() {
 
 }
@@ -316,6 +353,12 @@ fun openCamera() {
 fun editChatScreen() {
 
 }
+
+
+fun moveToArchiveChats() {
+
+}
+
 
 
 

@@ -13,7 +13,7 @@ import com.example.whatssappmainactivitymock.R
 @Composable
 fun CallsScreen() {
     Column(modifier = Modifier.fillMaxSize()) {
-        Title(title = stringResource(R.string.calls),
+        TitleBar(title = stringResource(R.string.calls),
             textAlignment = TextAlign.Start,
             arrangement = Arrangement.Start,
             textSize = 36.sp)

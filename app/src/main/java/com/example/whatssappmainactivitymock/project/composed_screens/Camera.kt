@@ -13,7 +13,7 @@ import com.example.whatssappmainactivitymock.R
 @Composable
 fun CameraScreen() {
     Column(modifier = Modifier.fillMaxSize()) {
-        Title(
+        TitleBar(
             title = stringResource(R.string.camera),
             textAlignment = TextAlign.Start,
             arrangement = Arrangement.Start, textSize = 36.sp

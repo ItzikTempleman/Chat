@@ -13,7 +13,7 @@ import com.example.whatssappmainactivitymock.R
 @Composable
 fun StatusScreen() {
     Column(modifier = Modifier.fillMaxSize()) {
-        Title(title = stringResource(R.string.status),
+        TitleBar(title = stringResource(R.string.status),
             textAlignment = TextAlign.Start,
             arrangement = Arrangement.Start,
            textSize = 36.sp

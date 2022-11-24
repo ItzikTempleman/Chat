@@ -75,7 +75,7 @@ fun BottomSheetDialogPopUp(isExpanded: Boolean) {
                                 tint = colorResource(R.color.light_grey)
                             )
                         }
-                        Title(
+                        TitleBar(
                             title = stringResource(R.string.new_chat),
                             textAlignment = TextAlign.Center,
                             arrangement = Arrangement.Center,
