@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.whatssappmainactivitymock.project.composed_screens.*
+import com.example.whatssappmainactivitymock.project.composed_screens.chat_screens.ChatsScreen
 
 @Composable
 fun BottomNavGraph(navController: NavHostController) {

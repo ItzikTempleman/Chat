@@ -9,6 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.example.whatssappmainactivitymock.R
+import com.example.whatssappmainactivitymock.project.composed_screens.chat_screens.TitleBar
 
 @Composable
 fun CallsScreen() {

@@ -1,6 +1,5 @@
 package com.example.whatssappmainactivitymock.project.composed_screens
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,10 +16,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.navigation.compose.composable
 import com.example.whatssappmainactivitymock.R
-import com.example.whatssappmainactivitymock.project.navigation.BottomBarScreen
-import com.example.whatssappmainactivitymock.project.navigation.BottomNavGraph
+import com.example.whatssappmainactivitymock.project.composed_screens.chat_screens.ContactListLazyColumn
+import com.example.whatssappmainactivitymock.project.composed_screens.chat_screens.TitleBar
 import kotlinx.coroutines.launch
 
 
