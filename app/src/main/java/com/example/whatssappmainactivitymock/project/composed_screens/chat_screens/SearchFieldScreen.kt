@@ -32,6 +32,7 @@ fun SearchField() {
                 .width(350.dp)
                 .height(50.dp)
                 .constrainAs(textField) {
+                    top.linkTo(parent.top)
                     end.linkTo(filterIcon.start)
                     start.linkTo(parent.start)
                 },

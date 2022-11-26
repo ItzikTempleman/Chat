@@ -3,12 +3,10 @@
 package com.example.whatssappmainactivitymock.project.composed_screens.chat_screens
 
 
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.*
 import androidx.compose.material.icons.filled.*
@@ -19,13 +17,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.whatssappmainactivitymock.R
 import com.example.whatssappmainactivitymock.project.composed_screens.*
 import com.example.whatssappmainactivitymock.project.navigation.ShowNavBar
+import me.onebone.toolbar.CollapsingToolbarScaffold
+import me.onebone.toolbar.ScrollStrategy
+import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
 
 
 val chats = getAllChats()
@@ -36,27 +37,42 @@ var isChatClicked = mutableStateOf(false)
 
 @Composable
 fun ChatsScreen() {
+    val state = rememberCollapsingToolbarScaffoldState()
     Column(modifier = Modifier.fillMaxWidth()) {
-        val scrollState = rememberScrollState()
-        TopBar(stringResource(R.string.edit))
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .scrollable(state = scrollState, orientation = Orientation.Vertical)) {
-            TitleBar(title = stringResource(R.string.chats),
-                textAlignment = TextAlign.Start,
-                arrangement = Arrangement.Start,
-                textSize = 36.sp)
-            SearchField()
-            BroadcastListAndNewGroup()
-            ArchivedChats()
-            ChatListLazyColumn()
-            ShowNavBar(isNavShowing)
+        TopBar()
+        CollapsingToolbarScaffold(modifier = Modifier,
+            state = state,
+            scrollStrategy = ScrollStrategy.EnterAlways,
+            toolbar = {
+                val textSize = (18 + (30 - 12) * state.toolbarState.progress).sp
+                Box(modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp)
+                    .pin()
+                    .background(color = colorResource(id = R.color.white)))
+                Column() {
+                    Text(text = stringResource(id = R.string.chats),
+                        style = TextStyle(color = colorResource(id = R.color.black),
+                            fontWeight = FontWeight.Bold,
+                            fontSize = textSize),
+                        modifier = Modifier.padding(16.dp))
+                    SearchField()
+                    BroadcastListAndNewGroup()
+                    ArchivedChats()
+                }
+
+            }
+        ) {
+            Column(modifier = Modifier.fillMaxSize()) {
+                ChatListLazyColumn()
+                ShowNavBar(isNavShowing)
+            }
         }
     }
 }
 
 @Composable
-fun TopBar(title: String) {
+fun TopBar() {
     ConstraintLayout(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -73,7 +89,7 @@ fun TopBar(title: String) {
                 fontSize = 20.sp,
                 color = colorResource(id = R.color.light_blue)
             ),
-            text = AnnotatedString(title),
+            text = AnnotatedString(stringResource(id = R.string.edit)),
             onClick = {
                 editChatScreen()
             }
@@ -122,6 +138,7 @@ fun TopBar(title: String) {
     BottomSheetDialogPopUp(isChatClicked.value)
 }
 
+
 @Composable
 fun ChatListLazyColumn() {
     LazyColumn(modifier = Modifier.fillMaxHeight()) {
@@ -139,6 +156,7 @@ fun ContactListLazyColumn() {
         })
     }
 }
+
 
 fun createNewGroup() {
 
