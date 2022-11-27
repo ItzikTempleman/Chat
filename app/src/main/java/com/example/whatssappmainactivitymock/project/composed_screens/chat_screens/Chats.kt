@@ -24,6 +24,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.whatssappmainactivitymock.R
 import com.example.whatssappmainactivitymock.project.composed_screens.*
 import com.example.whatssappmainactivitymock.project.navigation.ShowNavBar
+import kotlinx.coroutines.NonDisposableHandle.parent
 import me.onebone.toolbar.CollapsingToolbarScaffold
 import me.onebone.toolbar.ScrollStrategy
 import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
@@ -44,10 +45,10 @@ fun ChatsScreen() {
             state = state,
             scrollStrategy = ScrollStrategy.EnterAlways,
             toolbar = {
-                val textSize = (18 + (30 - 12) * state.toolbarState.progress).sp
+                val textSize = (30 * state.toolbarState.progress).sp
                 Box(modifier = Modifier
                     .fillMaxWidth()
-                    .height(50.dp)
+                    .height(30.dp)
                     .pin()
                     .background(color = colorResource(id = R.color.white)))
                 Column() {
@@ -55,7 +56,7 @@ fun ChatsScreen() {
                         style = TextStyle(color = colorResource(id = R.color.black),
                             fontWeight = FontWeight.Bold,
                             fontSize = textSize),
-                        modifier = Modifier.padding(16.dp))
+                        modifier = Modifier.padding(15.dp))
                     SearchField()
                     BroadcastListAndNewGroup()
                     ArchivedChats()
@@ -80,7 +81,7 @@ fun TopBar() {
         val (headerText, createButton, cameraIcon) = createRefs()
         ClickableText(
             modifier = Modifier
-                .padding(12.dp)
+                .padding(top = 14.dp, start=12.dp)
                 .constrainAs(headerText) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
@@ -102,7 +103,7 @@ fun TopBar() {
         },
 
             modifier = Modifier
-                .padding(12.dp)
+                .padding(top = 14.dp, end = 12.dp)
                 .size(24.dp)
                 .constrainAs(createButton) {
                     top.linkTo(parent.top)
@@ -120,7 +121,7 @@ fun TopBar() {
             openCamera()
         },
             modifier = Modifier
-                .padding(9.dp)
+                .padding(top=12.dp, end = 9.dp)
                 .size(30.dp)
                 .constrainAs(cameraIcon) {
                     top.linkTo(parent.top)

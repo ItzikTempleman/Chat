@@ -3,6 +3,7 @@ package com.example.whatssappmainactivitymock.project.composed_screens.chat_scre
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
@@ -12,6 +13,9 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.BaselineShift
+import androidx.compose.ui.text.style.LineHeightStyle
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -30,7 +34,7 @@ fun SearchField() {
         TextField(
             modifier = Modifier
                 .width(350.dp)
-                .height(50.dp)
+                .height(44.dp)
                 .constrainAs(textField) {
                     top.linkTo(parent.top)
                     end.linkTo(filterIcon.start)
@@ -41,13 +45,16 @@ fun SearchField() {
                 newText = initialText
             },
             textStyle = TextStyle(
-                fontSize = 16.sp
+                fontSize = 11.5.sp,
+                letterSpacing = 0.sp,
+                baselineShift = BaselineShift.None,
+                lineHeight = 1.sp
 
             ),
             placeholder = {
                 Text(
                     text = stringResource(R.string.search),
-                    fontSize = 16.sp
+                    fontSize = 11.5.sp
                 )
             },
 
@@ -67,8 +74,10 @@ fun SearchField() {
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent
             ),
-            shape = RoundedCornerShape(8.dp)
-        )
+            shape = RoundedCornerShape(8.dp),
+
+
+            )
 
         IconButton(onClick = {
             isFiltered.value = !isFiltered.value
