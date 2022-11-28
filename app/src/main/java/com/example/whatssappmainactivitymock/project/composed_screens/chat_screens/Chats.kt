@@ -23,6 +23,8 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.whatssappmainactivitymock.R
 import com.example.whatssappmainactivitymock.project.composed_screens.*
+import com.example.whatssappmainactivitymock.project.models.getAllChats
+import com.example.whatssappmainactivitymock.project.models.getFilteredChats
 import com.example.whatssappmainactivitymock.project.navigation.ShowNavBar
 import kotlinx.coroutines.NonDisposableHandle.parent
 import me.onebone.toolbar.CollapsingToolbarScaffold

@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.whatssappmainactivitymock.R
 import com.example.whatssappmainactivitymock.project.models.User
+import com.example.whatssappmainactivitymock.project.models.getUsersForNewChatList
 
 val usersForNewChatList = getUsersForNewChatList()
 
