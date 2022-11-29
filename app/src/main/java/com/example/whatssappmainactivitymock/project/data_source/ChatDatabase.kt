@@ -11,9 +11,4 @@ abstract class ChatDatabase : RoomDatabase() {
 
     abstract fun userDao(): ChatDao
 
-    val database = Room.databaseBuilder(
-        ApplicationContext.getInstance,
-        ChatDatabase::class.java, "chat_db"
-    ).build()
-
 }
