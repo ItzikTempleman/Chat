@@ -10,11 +10,6 @@ private val allChats: MutableList<Chat> = mutableListOf()
 private val filteredChatList: MutableList<Chat> = mutableListOf()
 
 
-
-
-
-
-
 private val user1 = User("John", "Cohen")
 private val user2 = User("Michael", "Potter")
 private val user3 = User("Orel", "Lev")
