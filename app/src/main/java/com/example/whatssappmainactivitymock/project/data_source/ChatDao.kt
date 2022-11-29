@@ -25,7 +25,5 @@ interface ChatDao {
 
     @Delete
     suspend fun deleteSingleChat(chat: Chat)
-
-
-
+    
 }

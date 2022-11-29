@@ -4,9 +4,13 @@ import com.example.whatssappmainactivitymock.R
 
 
 private const val defaultImage= R.drawable.profile_image
+
 private val allUsers: MutableList<User> = mutableListOf()
 private val allChats: MutableList<Chat> = mutableListOf()
 private val filteredChatList: MutableList<Chat> = mutableListOf()
+
+
+
 
 
 
@@ -33,6 +37,9 @@ private val chat7 = Chat(1234233,user7, "its a snake!", defaultImage)
 private val chat8 = Chat(1234231,user8, "Wrong number", defaultImage)
 private val chat9 = Chat(12342343,user9, "Liked it ", defaultImage)
 private val chat10 = Chat(123422,user10, "its actually good", defaultImage)
+
+
+
 
 fun getAllChats(): MutableList<Chat> {
     allChats.add(chat1)
