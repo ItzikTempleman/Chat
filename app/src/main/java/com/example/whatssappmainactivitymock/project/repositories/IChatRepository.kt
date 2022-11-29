@@ -2,7 +2,7 @@ package com.example.whatssappmainactivitymock.project.repositories
 
 import com.example.whatssappmainactivitymock.project.models.Chat
 
-interface IRepository {
+interface IChatRepository {
 
     suspend fun saveChat(chat: Chat)
 

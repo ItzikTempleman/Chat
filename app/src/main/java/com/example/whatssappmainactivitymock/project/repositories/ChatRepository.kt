@@ -4,7 +4,7 @@ import com.example.whatssappmainactivitymock.project.data_source.ChatDao
 import com.example.whatssappmainactivitymock.project.models.Chat
 import javax.inject.Inject
 
-class ChatRepository @Inject constructor(private val chatDao: ChatDao): IRepository{
+class ChatRepository @Inject constructor(private val chatDao: ChatDao): IChatRepository{
 
     override suspend fun saveChat(chat: Chat)=chatDao.insertAChat(chat)
 
