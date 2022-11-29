@@ -15,10 +15,17 @@ interface ChatDao {
     @Query("SELECT * FROM chats_table")
     suspend fun getAllChatsList(): MutableList<Chat>
 
-    @Delete
-    suspend fun deleteAChat(chat: Chat)
+
+    @Query("SELECT * FROM chats_table")
+    suspend fun getSingleChat(): Chat
 
     @Delete
     suspend fun deleteAllChats()
+
+
+    @Delete
+    suspend fun deleteSingleChat(chat: Chat)
+
+
 
 }

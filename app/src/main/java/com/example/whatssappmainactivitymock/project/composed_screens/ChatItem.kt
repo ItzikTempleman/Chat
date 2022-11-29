@@ -87,3 +87,7 @@ fun ChatItemScreen(chat: Chat) {
 
     }
 }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes

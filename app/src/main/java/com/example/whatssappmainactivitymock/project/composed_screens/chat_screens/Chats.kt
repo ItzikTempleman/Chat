@@ -26,7 +26,6 @@ import com.example.whatssappmainactivitymock.project.composed_screens.*
 import com.example.whatssappmainactivitymock.project.models.getAllChats
 import com.example.whatssappmainactivitymock.project.models.getFilteredChats
 import com.example.whatssappmainactivitymock.project.navigation.ShowNavBar
-import kotlinx.coroutines.NonDisposableHandle.parent
 import me.onebone.toolbar.CollapsingToolbarScaffold
 import me.onebone.toolbar.ScrollStrategy
 import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
@@ -83,7 +82,7 @@ fun TopBar() {
         val (headerText, createButton, cameraIcon) = createRefs()
         ClickableText(
             modifier = Modifier
-                .padding(top = 14.dp, start=12.dp)
+                .padding(top = 14.dp, start = 12.dp)
                 .constrainAs(headerText) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
@@ -123,7 +122,7 @@ fun TopBar() {
             openCamera()
         },
             modifier = Modifier
-                .padding(top=12.dp, end = 9.dp)
+                .padding(top = 12.dp, end = 9.dp)
                 .size(30.dp)
                 .constrainAs(cameraIcon) {
                     top.linkTo(parent.top)
@@ -157,6 +156,7 @@ fun ContactListLazyColumn() {
         items(items = usersForNewChatList, itemContent = {
             ChooseContact(it)
         })
+
     }
 }
 
