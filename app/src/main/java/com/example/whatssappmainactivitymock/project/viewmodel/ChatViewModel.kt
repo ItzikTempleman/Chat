@@ -9,5 +9,5 @@ import javax.inject.Inject
 class ChatViewModel @Inject constructor(private val repository: ChatRepository) : ViewModel() {
     suspend fun insertChat(chat: Chat) = repository.saveChat(chat)
 
-    
+
 }

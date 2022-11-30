@@ -32,7 +32,7 @@ fun ChatItemScreen(chat: Chat) {
         val (imageIcon, userName, message, divider) = createRefs()
 
         Image(
-            painter = painterResource(chat.image),
+            painter = painterResource(chat.person.image),
             contentDescription = "profile image",
             contentScale = ContentScale.Crop,
             modifier = Modifier
@@ -49,7 +49,7 @@ fun ChatItemScreen(chat: Chat) {
 
 
         Text(
-            text = chat.name.firstName + " " + chat.name.familyName,
+            text = chat.person.firstName + " " + chat.person.familyName,
             modifier = Modifier
                 .padding(start = 4.dp)
                 .constrainAs(userName) {
@@ -63,7 +63,7 @@ fun ChatItemScreen(chat: Chat) {
         )
 
         Text(
-            text = chat.summary,
+            text = chat.messageList[0].content,
             modifier = Modifier
                 .padding(start = 4.dp)
                 .constrainAs(message) {

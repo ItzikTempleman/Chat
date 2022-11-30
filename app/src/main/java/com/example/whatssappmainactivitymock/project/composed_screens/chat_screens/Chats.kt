@@ -1,7 +1,4 @@
-@file:OptIn(ExperimentalMaterialApi::class)
-
 package com.example.whatssappmainactivitymock.project.composed_screens.chat_screens
-
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -29,7 +26,6 @@ import com.example.whatssappmainactivitymock.project.navigation.ShowNavBar
 import me.onebone.toolbar.CollapsingToolbarScaffold
 import me.onebone.toolbar.ScrollStrategy
 import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
-
 
 val chats = getAllChats()
 val filteredChats = getFilteredChats()
@@ -73,6 +69,7 @@ fun ChatsScreen() {
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun TopBar() {
     ConstraintLayout(
