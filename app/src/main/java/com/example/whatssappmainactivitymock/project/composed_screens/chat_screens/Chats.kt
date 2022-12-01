@@ -1,6 +1,8 @@
 package com.example.whatssappmainactivitymock.project.composed_screens.chat_screens
 
+import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -20,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.whatssappmainactivitymock.R
 import com.example.whatssappmainactivitymock.project.composed_screens.*
+import com.example.whatssappmainactivitymock.project.models.Chat
 import com.example.whatssappmainactivitymock.project.models.getAllChats
 import com.example.whatssappmainactivitymock.project.models.getFilteredChats
 import com.example.whatssappmainactivitymock.project.navigation.ShowNavBar
@@ -142,7 +145,14 @@ fun TopBar() {
 fun ChatListLazyColumn() {
     LazyColumn(modifier = Modifier.fillMaxHeight()) {
         items(items = if (isFiltered.value) filteredChats else chats, itemContent = {
-            ChatItemScreen(it)
+            Surface(modifier = Modifier
+                .fillMaxHeight()
+                .clickable {
+                    openChatScreen(it)
+                }
+            ) {
+                ChatItemScreen(it)
+            }
         })
     }
 }
@@ -153,8 +163,12 @@ fun ContactListLazyColumn() {
         items(items = usersForNewChatList, itemContent = {
             ChooseContact(it)
         })
-
     }
+}
+
+
+fun openChatScreen(chat: Chat) {
+    Log.d("TAG", chat.user.firstName)
 }
 
 

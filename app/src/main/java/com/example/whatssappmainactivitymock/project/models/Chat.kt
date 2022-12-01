@@ -6,6 +6,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "chats_table")
 data class Chat(
     @PrimaryKey
-    val person:User, val messageList:List<ChatContent>)
+    val user:User, val messageList:List<String>)
 
 

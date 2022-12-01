@@ -22,16 +22,16 @@ private val user9 = User(1234235,defaultImage,"Moral", "Cortez")
 private val user10 = User(12342343,defaultImage,"Jeff", "Daniels")
 
 
-private val firstMessage= ChatContent("Yeah i'm coming!")
-private val secondMessage= ChatContent("Don't tell")
-private val thirdMessage= ChatContent("yes")
-private val fourthMessage= ChatContent("My favorite..")
-private val fifthMessage= ChatContent("What time?")
-private val sixthMessage= ChatContent("its a snake!")
-private val seventhMessage= ChatContent("Yeah i'm coming!")
-private val eighthMessage= ChatContent("Wrong number")
-private val ninthMessage= ChatContent("Liked it ")
-private val tenthMessage= ChatContent("its actually good")
+private const val firstMessage= "Yeah i'm coming!"
+private const val secondMessage= "Don't tell"
+private const val thirdMessage= "yes"
+private const val fourthMessage= "My favorite.."
+private const val fifthMessage= "What time?"
+private const val sixthMessage= "its a snake!"
+private const val seventhMessage= "Yeah i'm coming!"
+private const val eighthMessage= "Wrong number"
+private const val ninthMessage= "Liked it "
+private const val tenthMessage= "its actually good"
 
 
 

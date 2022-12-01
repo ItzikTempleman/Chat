@@ -4,6 +4,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -12,14 +14,13 @@ import com.example.whatssappmainactivitymock.R
 
 
 @Composable
-fun Chat(individualChatMessageList: MutableList<String>) {
+fun ChatMessageScreen(individualChatMessageList: List<String>) {
 
     Column(modifier = Modifier.fillMaxWidth()) {
         ChatTopBar()
         ChatLazyColumn(individualChatMessageList)
         MessageBottomTextField()
     }
-
 }
 
 @Composable
@@ -33,16 +34,16 @@ fun MessageBottomTextField() {
 }
 
 @Composable
-fun ChatLazyColumn(chat: MutableList<String>) {
+fun ChatLazyColumn(chat: List<String>) {
     LazyColumn(modifier = Modifier.fillMaxHeight()) {
-        items(items = chat, itemContent = {message->
-            MessageItem(message)
+        items(items = chat, itemContent = {
+            MessageItem(it)
         })
     }
 }
 
 @Composable
-fun MessageItem(message: String) {
+fun MessageItem(messageList: String) {
 
 }
 
@@ -50,4 +51,21 @@ fun MessageItem(message: String) {
 @Composable
 fun ChatTopBar() {
 
+}
+
+
+@Composable
+fun ChatBubble(isUserMe: Boolean) {
+    Row(Modifier.height(IntrinsicSize.Max)) {
+        Column(
+            modifier = Modifier
+                .background(
+                    color = if (isUserMe) colorResource(R.color.tea_green) else colorResource(R.color.white),
+                    shape = if (isUserMe) RoundedCornerShape(4.dp, 4.dp, 0.dp, 4.dp) else RoundedCornerShape(4.dp, 4.dp, 4.dp, 0.dp)
+                )
+                .width(IntrinsicSize.Max)
+        ) {
+            Text("Demo chat")
+        }
+    }
 }
