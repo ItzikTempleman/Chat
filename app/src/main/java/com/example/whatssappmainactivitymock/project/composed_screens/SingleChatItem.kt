@@ -15,7 +15,6 @@ import com.example.whatssappmainactivitymock.R
 
 @Composable
 fun ChatMessageScreen(individualChatMessageList: List<String>) {
-
     Column(modifier = Modifier.fillMaxWidth()) {
         ChatTopBar()
         ChatLazyColumn(individualChatMessageList)

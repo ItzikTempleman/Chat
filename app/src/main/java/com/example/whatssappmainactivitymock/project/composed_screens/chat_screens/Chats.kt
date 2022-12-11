@@ -20,11 +20,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.navigation.compose.rememberNavController
 import com.example.whatssappmainactivitymock.R
 import com.example.whatssappmainactivitymock.project.composed_screens.*
 import com.example.whatssappmainactivitymock.project.models.Chat
 import com.example.whatssappmainactivitymock.project.models.getAllChats
 import com.example.whatssappmainactivitymock.project.models.getFilteredChats
+import com.example.whatssappmainactivitymock.project.navigation.ChatMessageScreenNavGraph
 import com.example.whatssappmainactivitymock.project.navigation.ShowNavBar
 import me.onebone.toolbar.CollapsingToolbarScaffold
 import me.onebone.toolbar.ScrollStrategy
@@ -61,15 +63,23 @@ fun ChatsScreen() {
                     BroadcastListAndNewGroup()
                     ArchivedChats()
                 }
-
             }
         ) {
             Column(modifier = Modifier.fillMaxSize()) {
-                ChatListLazyColumn()
+                ChatListLazyColumn(){
+                    Log.d("TAG", it.user.firstName)
+                   // moveToChat(it.messageList)
+
+                }
                 ShowNavBar(isNavShowing)
             }
         }
     }
+}
+
+@Composable
+fun moveToChat(messageList: List<String>) {
+    ChatMessageScreen(individualChatMessageList = messageList)
 }
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -82,7 +92,7 @@ fun TopBar() {
         val (headerText, createButton, cameraIcon) = createRefs()
         ClickableText(
             modifier = Modifier
-                .padding(top = 14.dp, start = 12.dp)
+                .padding(top = 24.dp, start = 12.dp)
                 .constrainAs(headerText) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
@@ -98,13 +108,12 @@ fun TopBar() {
         )
 
         IconButton(onClick = {
-
             isChatClicked.value = true
             isNavShowing.value = false
         },
 
             modifier = Modifier
-                .padding(top = 14.dp, end = 12.dp)
+                .padding(top = 24.dp, end = 20.dp)
                 .size(24.dp)
                 .constrainAs(createButton) {
                     top.linkTo(parent.top)
@@ -122,7 +131,7 @@ fun TopBar() {
             openCamera()
         },
             modifier = Modifier
-                .padding(top = 12.dp, end = 9.dp)
+                .padding(top = 21.dp, end = 30.dp)
                 .size(30.dp)
                 .constrainAs(cameraIcon) {
                     top.linkTo(parent.top)
@@ -140,15 +149,14 @@ fun TopBar() {
     BottomSheetDialogPopUp(isChatClicked.value)
 }
 
-
 @Composable
-fun ChatListLazyColumn() {
+fun ChatListLazyColumn(selectedChat:(Chat)->Unit) {
     LazyColumn(modifier = Modifier.fillMaxHeight()) {
         items(items = if (isFiltered.value) filteredChats else chats, itemContent = {
             Surface(modifier = Modifier
                 .fillMaxHeight()
                 .clickable {
-                    openChatScreen(it)
+                    selectedChat(it)
                 }
             ) {
                 ChatItemScreen(it)
@@ -165,12 +173,6 @@ fun ContactListLazyColumn() {
         })
     }
 }
-
-
-fun openChatScreen(chat: Chat) {
-    Log.d("TAG", chat.user.firstName)
-}
-
 
 fun createNewGroup() {
 

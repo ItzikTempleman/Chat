@@ -37,4 +37,9 @@ sealed class BottomBarScreen(
         title = "Settings",
         icon = R.drawable.settings
     )
+
+}
+
+sealed class ChatScreen(val route: String){
+    object ChatPage: ChatScreen("Chat screen")
 }

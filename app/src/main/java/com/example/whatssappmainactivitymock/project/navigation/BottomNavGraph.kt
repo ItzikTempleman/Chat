@@ -30,3 +30,13 @@ fun BottomNavGraph(navController: NavHostController) {
         }
     }
 }
+
+
+@Composable
+fun ChatMessageScreenNavGraph(navController: NavHostController, messageList:List<String>){
+    NavHost(navController,  ChatScreen.ChatPage.route){
+        composable(route = ChatScreen.ChatPage.route) {
+            ChatMessageScreen(individualChatMessageList =messageList )
+        }
+    }
+}
