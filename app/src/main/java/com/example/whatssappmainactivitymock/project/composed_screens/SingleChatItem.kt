@@ -14,11 +14,12 @@ import com.example.whatssappmainactivitymock.R
 
 
 @Composable
-fun ChatMessageScreen(individualChatMessageList: List<String>) {
+fun ChatMessageScreen(individualChatMessageList: List<String>? = null) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        ChatTopBar()
-        ChatLazyColumn(individualChatMessageList)
-        MessageBottomTextField()
+        Text(text = "WoW")
+        /*ChatTopBar()
+        ChatLazyColumn(individualChatMessageList ?: emptyList())
+        MessageBottomTextField()*/
     }
 }
 
@@ -60,7 +61,10 @@ fun ChatBubble(isUserMe: Boolean) {
             modifier = Modifier
                 .background(
                     color = if (isUserMe) colorResource(R.color.tea_green) else colorResource(R.color.white),
-                    shape = if (isUserMe) RoundedCornerShape(4.dp, 4.dp, 0.dp, 4.dp) else RoundedCornerShape(4.dp, 4.dp, 4.dp, 0.dp)
+                    shape = if (isUserMe) RoundedCornerShape(4.dp,
+                        4.dp,
+                        0.dp,
+                        4.dp) else RoundedCornerShape(4.dp, 4.dp, 4.dp, 0.dp)
                 )
                 .width(IntrinsicSize.Max)
         ) {

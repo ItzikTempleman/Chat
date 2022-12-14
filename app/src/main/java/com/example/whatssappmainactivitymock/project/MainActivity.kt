@@ -3,7 +3,8 @@ package com.example.whatssappmainactivitymock.project
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.example.whatssappmainactivitymock.project.navigation.MainScreen
+import androidx.navigation.compose.rememberNavController
+import com.example.whatssappmainactivitymock.project.navigation.MainContainerNavGraph
 import com.example.whatssappmainactivitymock.theme.WhatssappMainActivityMockTheme
 
 class MainActivity : ComponentActivity() {
@@ -13,8 +14,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             WhatssappMainActivityMockTheme {
-                //MainNavGraph(navController = NavHostController(this), composable = MainScreen())
-                MainScreen()
+
+                val navController = rememberNavController()
+                MainContainerNavGraph(navController)
+
+                //MainScreen()
             }
         }
     }

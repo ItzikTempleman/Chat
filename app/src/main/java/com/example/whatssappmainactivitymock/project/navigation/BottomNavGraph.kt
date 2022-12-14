@@ -4,7 +4,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.whatssappmainactivitymock.project.composed_screens.*
+import com.example.whatssappmainactivitymock.project.composed_screens.CallsScreen
+import com.example.whatssappmainactivitymock.project.composed_screens.CommunityScreen
+import com.example.whatssappmainactivitymock.project.composed_screens.SettingsScreen
+import com.example.whatssappmainactivitymock.project.composed_screens.StatusScreen
 import com.example.whatssappmainactivitymock.project.composed_screens.chat_screens.ChatsScreen
 
 @Composable
@@ -22,7 +25,7 @@ fun BottomNavGraph(navController: NavHostController) {
             CommunityScreen()
         }
         composable(route = BottomBarScreen.Chats.route) {
-            ChatsScreen()
+            ChatsScreen(navController)
         }
 
         composable(route = BottomBarScreen.Settings.route) {
@@ -32,11 +35,4 @@ fun BottomNavGraph(navController: NavHostController) {
 }
 
 
-@Composable
-fun ChatMessageScreenNavGraph(navController: NavHostController, messageList:List<String>){
-    NavHost(navController,  ChatScreen.ChatPage.route){
-        composable(route = ChatScreen.ChatPage.route) {
-            ChatMessageScreen(individualChatMessageList =messageList )
-        }
-    }
-}
+

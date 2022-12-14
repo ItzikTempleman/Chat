@@ -5,9 +5,7 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -21,34 +19,20 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.whatssappmainactivitymock.R
 
-var isNavVisible = mutableStateOf(true)
-
-@Composable
-fun ShowNavBar(navStatus: MutableState<Boolean>) {
-    isNavVisible = navStatus
-}
-
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MainScreen() {
-    if (isNavVisible.value) {
-        val navController = rememberNavController()
-        Scaffold(bottomBar = { BottomBar(navController) }) {
-            BottomNavGraph(navController)
-        }
+    val navController = rememberNavController()
+    Scaffold(
+        bottomBar = { BottomBar(navController) }) {
+        BottomNavGraph(navController)
     }
 }
 
 @Composable
 fun BottomBar(navController: NavController) {
-    val screens = listOf(
-        BottomBarScreen.Status,
-        BottomBarScreen.Calls,
-        BottomBarScreen.Communities,
-        BottomBarScreen.Chats,
-        BottomBarScreen.Settings,
-    )
+    val screens = listOf(BottomBarScreen.Status, BottomBarScreen.Calls, BottomBarScreen.Communities, BottomBarScreen.Chats, BottomBarScreen.Settings)
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination

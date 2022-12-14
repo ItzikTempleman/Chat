@@ -2,11 +2,7 @@ package com.example.whatssappmainactivitymock.project.navigation
 
 import com.example.whatssappmainactivitymock.R
 
-sealed class BottomBarScreen(
-    val route: String,
-    val title: String,
-    val icon: Int
-) {
+sealed class BottomBarScreen(val route: String, val title: String, val icon: Int) {
 
     object Status : BottomBarScreen(
         route = "status",
@@ -40,6 +36,3 @@ sealed class BottomBarScreen(
 
 }
 
-sealed class ChatScreen(val route: String){
-    object ChatPage: ChatScreen("Chat screen")
-}

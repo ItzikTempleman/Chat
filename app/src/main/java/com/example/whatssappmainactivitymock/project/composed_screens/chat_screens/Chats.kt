@@ -20,14 +20,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavController
 import com.example.whatssappmainactivitymock.R
 import com.example.whatssappmainactivitymock.project.composed_screens.*
 import com.example.whatssappmainactivitymock.project.models.Chat
 import com.example.whatssappmainactivitymock.project.models.getAllChats
 import com.example.whatssappmainactivitymock.project.models.getFilteredChats
-import com.example.whatssappmainactivitymock.project.navigation.ChatMessageScreenNavGraph
-import com.example.whatssappmainactivitymock.project.navigation.ShowNavBar
+import com.example.whatssappmainactivitymock.project.navigation.Screen
 import me.onebone.toolbar.CollapsingToolbarScaffold
 import me.onebone.toolbar.ScrollStrategy
 import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
@@ -39,7 +38,7 @@ var isFiltered = mutableStateOf(false)
 var isChatClicked = mutableStateOf(false)
 
 @Composable
-fun ChatsScreen() {
+fun ChatsScreen(navController:NavController) {
     val state = rememberCollapsingToolbarScaffoldState()
     Column(modifier = Modifier.fillMaxWidth()) {
         TopBar()
@@ -65,22 +64,17 @@ fun ChatsScreen() {
                 }
             }
         ) {
-            Column(modifier = Modifier.fillMaxSize()) {
+            Column(Modifier.fillMaxSize()) {
                 ChatListLazyColumn(){
                     Log.d("TAG", it.user.firstName)
-                   // moveToChat(it.messageList)
 
+                    navController.navigate(Screen.ChatMessageScreen.route)
                 }
-                ShowNavBar(isNavShowing)
             }
         }
     }
 }
 
-@Composable
-fun moveToChat(messageList: List<String>) {
-    ChatMessageScreen(individualChatMessageList = messageList)
-}
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
