@@ -45,15 +45,16 @@ fun BottomBar(navController: NavHostController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    val bottomBarDestination = screens.any {
-        it.id == currentDestination?.route
-    }
-
-    BottomNavigation {
-        screens.forEach { screen ->
-            AddItem(
-                screen, currentDestination, navController
-            )
+    val bottomBarDestination = screens.any { it.id == currentDestination?.route }
+    if (bottomBarDestination) {
+        BottomNavigation(
+            backgroundColor = colorResource(R.color.white)
+        ) {
+            screens.forEach { screen ->
+                AddItem(
+                    screen, currentDestination, navController
+                )
+            }
         }
     }
 }
