@@ -11,7 +11,6 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.BlendMode.Companion.Screen
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -27,7 +26,6 @@ import com.example.whatssappmainactivitymock.project.composed_screens.*
 import com.example.whatssappmainactivitymock.project.models.Chat
 import com.example.whatssappmainactivitymock.project.models.getAllChats
 import com.example.whatssappmainactivitymock.project.models.getFilteredChats
-import com.example.whatssappmainactivitymock.project.navigation.Screen
 import me.onebone.toolbar.CollapsingToolbarScaffold
 import me.onebone.toolbar.ScrollStrategy
 import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
@@ -69,7 +67,7 @@ fun ChatsScreen(navController:NavController) {
                 ChatListLazyColumn(){
                     Log.d("TAG", it.user.firstName)
 
-                    navController.navigate(Screen.ChatMessageScreen.route)
+                    //navController.navigate(Screen.ChatMessageScreen.route)
                 }
             }
         }
