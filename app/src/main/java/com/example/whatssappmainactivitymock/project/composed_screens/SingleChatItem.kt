@@ -10,11 +10,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.whatssappmainactivitymock.R
 
 
 @Composable
-fun ChatMessageScreen(individualChatMessageList: List<String>) {
+fun ChatMessageScreen(navController: NavHostController, individualChatMessageList: List<String>) {
     Column(modifier = Modifier.fillMaxWidth()) {
         ChatTopBar()
         ChatLazyColumn(individualChatMessageList)

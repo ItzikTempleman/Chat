@@ -2,14 +2,25 @@ package com.example.whatssappmainactivitymock.project.navigation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+
 import androidx.compose.runtime.getValue
+
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.whatssappmainactivitymock.R
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -48,29 +59,39 @@ fun BottomBar(navController: NavHostController) {
 }
 
 @Composable
-fun RowScope.AddItem(
-    screen: BottomBarScreen,
-    currentDestination: NavDestination?,
-    navController: NavHostController,
-) {
+fun RowScope.AddItem(screen: BottomBarScreen, currentDestination: NavDestination?, navController: NavHostController) {
+
     BottomNavigationItem(
+
         label = {
-            Text(text = screen.title)
+            Text(
+                text = screen.title,
+                fontSize = 9.sp
+            )
         },
+
+        selectedContentColor = colorResource(R.color.toolbar_blue),
+
         icon = {
+
             Icon(
-                imageVector = screen.icon,
+                modifier = Modifier.size(32.dp),
+                painter = painterResource(screen.icon),
+
                 contentDescription = "Navigation Icon"
             )
         },
+
         selected = currentDestination?.hierarchy?.any {
-            it.id == screen.id
+            it.route == screen.id
         } == true,
-        unselectedContentColor = LocalContentColor.current.copy(
-            alpha = ContentAlpha.disabled),
+
+        unselectedContentColor = colorResource(R.color.grey),
         onClick = {
-
-
+            navController.navigate(screen.id) {
+                popUpTo(navController.graph.findStartDestination().id)
+                launchSingleTop = true
+            }
         }
     )
 }
