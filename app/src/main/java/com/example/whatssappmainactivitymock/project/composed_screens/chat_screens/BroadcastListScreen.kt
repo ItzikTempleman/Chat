@@ -37,9 +37,8 @@ fun BroadcastListAndNewGroup() {
             text = AnnotatedString(stringResource(R.string.broadcast_lists)),
             onClick = {
                 moveToBroadCastList()
-            },
-
-            )
+            }
+        )
 
         ClickableText(
             modifier = Modifier

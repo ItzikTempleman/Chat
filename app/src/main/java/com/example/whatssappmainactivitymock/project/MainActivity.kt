@@ -4,7 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.compose.rememberNavController
-import com.example.whatssappmainactivitymock.project.navigation.RootNavigationGraph
+
+import com.example.whatssappmainactivitymock.project.navigation.MainNavigationHost
 import com.example.whatssappmainactivitymock.theme.WhatssappMainActivityMockTheme
 
 class MainActivity : ComponentActivity() {
@@ -14,7 +15,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             WhatssappMainActivityMockTheme {
-                RootNavigationGraph(navController = rememberNavController())
+                MainNavigationHost(rememberNavController())
             }
         }
     }

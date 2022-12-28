@@ -21,11 +21,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.whatssappmainactivitymock.R
 import com.example.whatssappmainactivitymock.project.composed_screens.*
 import com.example.whatssappmainactivitymock.project.models.Chat
 import com.example.whatssappmainactivitymock.project.models.getAllChats
 import com.example.whatssappmainactivitymock.project.models.getFilteredChats
+import com.example.whatssappmainactivitymock.project.navigation.AppGraph.DETAILS
+import com.example.whatssappmainactivitymock.project.navigation.DetailsNavGraph
 import me.onebone.toolbar.CollapsingToolbarScaffold
 import me.onebone.toolbar.ScrollStrategy
 import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
@@ -37,7 +40,8 @@ var isFiltered = mutableStateOf(false)
 var isChatClicked = mutableStateOf(false)
 
 @Composable
-fun ChatsScreen(navController:NavController) {
+fun ChatsScreen(navController:NavHostController) {
+
     val state = rememberCollapsingToolbarScaffoldState()
     Column(modifier = Modifier.fillMaxWidth()) {
         TopBar()
@@ -67,7 +71,7 @@ fun ChatsScreen(navController:NavController) {
                 ChatListLazyColumn(){
                     Log.d("TAG", it.user.firstName)
 
-                    //navController.navigate(Screen.ChatMessageScreen.route)
+                    navController.navigate(DETAILS)
                 }
             }
         }
@@ -137,7 +141,6 @@ fun TopBar() {
                 tint = colorResource(R.color.light_blue)
             )
         }
-
     }
     BottomSheetDialogPopUp(isChatClicked.value)
 }

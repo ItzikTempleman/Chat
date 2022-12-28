@@ -9,3 +9,10 @@ data class Chat(
     val user:User, val messageList:List<String>)
 
 
+
+data class User(
+    var id:Long,
+    val image:Int,
+    var firstName: String,
+    var familyName: String,
+)

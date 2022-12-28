@@ -27,9 +27,9 @@ import com.example.whatssappmainactivitymock.R
 @Composable
 fun HomeScreen(navController: NavHostController = rememberNavController()) {
     Scaffold(
-        bottomBar = { BottomBar(navController = navController) }
+        bottomBar = { BottomBar(navController) }
     ) {
-        HomeNavGraph(navController = navController)
+        HomeScreenNavHost(navController)
     }
 }
 
@@ -61,32 +61,24 @@ fun BottomBar(navController: NavHostController) {
 
 @Composable
 fun RowScope.AddItem(screen: BottomBarScreen, currentDestination: NavDestination?, navController: NavHostController) {
-
     BottomNavigationItem(
-
         label = {
             Text(
                 text = screen.title,
                 fontSize = 9.sp
             )
         },
-
         selectedContentColor = colorResource(R.color.toolbar_blue),
-
         icon = {
-
             Icon(
                 modifier = Modifier.size(32.dp),
                 painter = painterResource(screen.icon),
-
                 contentDescription = "Navigation Icon"
             )
         },
-
         selected = currentDestination?.hierarchy?.any {
             it.route == screen.id
         } == true,
-
         unselectedContentColor = colorResource(R.color.grey),
         onClick = {
             navController.navigate(screen.id) {

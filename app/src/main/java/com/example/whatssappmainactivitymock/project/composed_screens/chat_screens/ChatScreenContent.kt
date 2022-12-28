@@ -9,7 +9,7 @@ import com.example.whatssappmainactivitymock.project.composed_screens.ChatTopBar
 import com.example.whatssappmainactivitymock.project.composed_screens.MessageBottomTextField
 
 @Composable
-fun ScreenContent(individualChatMessage: String, function: () -> Unit) {
+fun ScreenContent(individualChatMessage: List<String>) {
         Column(modifier = Modifier.fillMaxWidth()) {
             ChatTopBar()
             ChatLazyColumn(emptyList())
