@@ -1,4 +1,4 @@
-package com.example.whatssappmainactivitymock.project.composed_screens
+package com.example.whatssappmainactivitymock.project.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -17,8 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.whatssappmainactivitymock.R
-import com.example.whatssappmainactivitymock.project.composed_screens.chat_screens.ContactListLazyColumn
-import com.example.whatssappmainactivitymock.project.composed_screens.chat_screens.TitleBar
+import com.example.whatssappmainactivitymock.project.screens.chat_screens.TitleBar
 import kotlinx.coroutines.launch
 
 

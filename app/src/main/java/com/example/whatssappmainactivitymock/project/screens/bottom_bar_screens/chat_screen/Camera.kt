@@ -1,4 +1,4 @@
-package com.example.whatssappmainactivitymock.project.composed_screens
+package com.example.whatssappmainactivitymock.project.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,15 +9,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.example.whatssappmainactivitymock.R
-import com.example.whatssappmainactivitymock.project.composed_screens.chat_screens.TitleBar
+import com.example.whatssappmainactivitymock.project.screens.chat_screens.TitleBar
 
 @Composable
-fun SettingsScreen() {
+fun CameraScreen() {
     Column(modifier = Modifier.fillMaxSize()) {
-        TitleBar(title = stringResource(R.string.settings),
+        TitleBar(
+            title = stringResource(R.string.camera),
             textAlignment = TextAlign.Start,
-            arrangement = Arrangement.Start,
-            textSize = 36.sp
+            arrangement = Arrangement.Start, textSize = 36.sp
         )
     }
 }

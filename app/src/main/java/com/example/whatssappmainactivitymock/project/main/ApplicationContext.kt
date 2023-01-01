@@ -1,4 +1,4 @@
-package com.example.whatssappmainactivitymock.project
+package com.example.whatssappmainactivitymock.project.main
 
 import android.app.Application
 

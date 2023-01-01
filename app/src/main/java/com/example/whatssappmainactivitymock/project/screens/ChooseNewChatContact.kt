@@ -1,4 +1,4 @@
-package com.example.whatssappmainactivitymock.project.composed_screens
+package com.example.whatssappmainactivitymock.project.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

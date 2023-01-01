@@ -1,4 +1,4 @@
-package com.example.whatssappmainactivitymock.project.data_source
+package com.example.whatssappmainactivitymock.project.data
 
 import androidx.room.Dao
 import androidx.room.Delete

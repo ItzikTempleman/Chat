@@ -1,4 +1,4 @@
-package com.example.whatssappmainactivitymock.project.navigation
+package com.example.whatssappmainactivitymock.project.screens.bottom_bar_screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.RowScope
@@ -23,15 +23,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.whatssappmainactivitymock.R
 
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@Composable
-fun HomeScreen(navController: NavHostController = rememberNavController()) {
-    Scaffold(
-        bottomBar = { BottomBar(navController) }
-    ) {
-        HomeScreenNavHost(navController)
-    }
-}
 
 @Composable
 fun BottomBar(navController: NavHostController) {
@@ -45,7 +36,7 @@ fun BottomBar(navController: NavHostController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    val bottomBarDestination = screens.any { it.id == currentDestination?.route }
+    val bottomBarDestination = screens.any { it.route == currentDestination?.route }
     if (bottomBarDestination) {
         BottomNavigation(
             backgroundColor = colorResource(R.color.white)
@@ -77,14 +68,50 @@ fun RowScope.AddItem(screen: BottomBarScreen, currentDestination: NavDestination
             )
         },
         selected = currentDestination?.hierarchy?.any {
-            it.route == screen.id
+            it.route == screen.route
         } == true,
         unselectedContentColor = colorResource(R.color.grey),
         onClick = {
-            navController.navigate(screen.id) {
+            navController.navigate(screen.route) {
                 popUpTo(navController.graph.findStartDestination().id)
                 launchSingleTop = true
             }
         }
+    )
+}
+
+sealed class BottomBarScreen(
+    val route: String,
+    val title: String,
+    val icon: Int,
+) {
+    object Status : BottomBarScreen(
+        route = "status",
+        title = "Status",
+        icon = R.drawable.status
+    )
+
+    object Calls : BottomBarScreen(
+        route = "calls",
+        title = "Calls",
+        icon = R.drawable.calls
+    )
+
+    object Communities : BottomBarScreen(
+        route = "communities",
+        title = "Communities",
+        icon = R.drawable.communities
+    )
+
+    object Chats : BottomBarScreen(
+        route = "chats",
+        title = "Chats",
+        icon = R.drawable.chats
+    )
+
+    object Settings : BottomBarScreen(
+        route = "settings",
+        title = "Settings",
+        icon = R.drawable.settings
     )
 }

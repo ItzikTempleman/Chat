@@ -1,4 +1,4 @@
-package com.example.whatssappmainactivitymock.project.composed_screens.chat_screens
+package com.example.whatssappmainactivitymock.project.screens.chat_screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

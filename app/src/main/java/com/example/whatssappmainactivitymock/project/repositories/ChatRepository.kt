@@ -1,6 +1,6 @@
 package com.example.whatssappmainactivitymock.project.repositories
 
-import com.example.whatssappmainactivitymock.project.data_source.ChatDao
+import com.example.whatssappmainactivitymock.project.data.ChatDao
 import com.example.whatssappmainactivitymock.project.models.Chat
 import javax.inject.Inject
 

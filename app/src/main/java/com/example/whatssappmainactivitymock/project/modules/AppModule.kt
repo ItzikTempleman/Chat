@@ -2,7 +2,7 @@ package com.example.whatssappmainactivitymock.project.modules
 
 import android.content.Context
 import androidx.room.Room
-import com.example.whatssappmainactivitymock.project.data_source.ChatDatabase
+import com.example.whatssappmainactivitymock.project.data.ChatDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

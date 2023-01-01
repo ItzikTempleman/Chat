@@ -1,36 +1,40 @@
-package com.example.whatssappmainactivitymock.project.composed_screens
+package com.example.whatssappmainactivitymock.project.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import com.example.whatssappmainactivitymock.R
 
+sealed class DetailsScreens(val route: String, val messages: List<String>) {
+    object ChatMessage : DetailsScreens("Chat details", emptyList())
+}
 
 @Composable
-fun ChatMessageScreen(navController: NavHostController, individualChatMessageList: List<String>) {
+fun ChatMessageScreen(name: String, onClick: () -> Unit) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        ChatTopBar()
-        ChatLazyColumn(individualChatMessageList)
+        ChatTopBar(name, onClick)
+        ChatLazyColumn(emptyList())
         MessageBottomTextField()
     }
 }
 
 @Composable
-fun MessageBottomTextField() {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(70.dp)
-            .background(colorResource(id = R.color.grey))
+fun ChatTopBar(name: String, onClick: () -> Unit) {
+    Text(
+        modifier = Modifier.clickable { onClick() },
+        text = name,
+        fontSize = MaterialTheme.typography.h3.fontSize,
+        fontWeight = FontWeight.Bold
     )
 }
 
@@ -44,14 +48,13 @@ fun ChatLazyColumn(chat: List<String>) {
 }
 
 @Composable
-fun MessageItem(messageList: String) {
-
-}
-
-
-@Composable
-fun ChatTopBar() {
-
+fun MessageBottomTextField() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(70.dp)
+            .background(colorResource(id = R.color.grey))
+    )
 }
 
 
@@ -62,7 +65,10 @@ fun ChatBubble(isUserMe: Boolean) {
             modifier = Modifier
                 .background(
                     color = if (isUserMe) colorResource(R.color.tea_green) else colorResource(R.color.white),
-                    shape = if (isUserMe) RoundedCornerShape(4.dp, 4.dp, 0.dp, 4.dp) else RoundedCornerShape(4.dp, 4.dp, 4.dp, 0.dp)
+                    shape = if (isUserMe) RoundedCornerShape(4.dp,
+                        4.dp,
+                        0.dp,
+                        4.dp) else RoundedCornerShape(4.dp, 4.dp, 4.dp, 0.dp)
                 )
                 .width(IntrinsicSize.Max)
         ) {
@@ -70,3 +76,9 @@ fun ChatBubble(isUserMe: Boolean) {
         }
     }
 }
+
+@Composable
+fun MessageItem(messageList: String) {
+
+}
+

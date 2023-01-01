@@ -1,4 +1,4 @@
-package com.example.whatssappmainactivitymock.project.composed_screens.chat_screens
+package com.example.whatssappmainactivitymock.project.screens.chat_screens
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,6 +14,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.whatssappmainactivitymock.R
+import com.example.whatssappmainactivitymock.project.screens.createNewGroup
+import com.example.whatssappmainactivitymock.project.screens.moveToBroadCastList
 
 @Composable
 fun BroadcastListAndNewGroup() {

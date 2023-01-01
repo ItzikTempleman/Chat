@@ -1,4 +1,4 @@
-package com.example.whatssappmainactivitymock.project.composed_screens
+package com.example.whatssappmainactivitymock.project.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.whatssappmainactivitymock.R
 import com.example.whatssappmainactivitymock.project.models.Chat
-import com.example.whatssappmainactivitymock.project.models.User
 
 @Composable
 fun ChatItemScreen(chat: Chat) {

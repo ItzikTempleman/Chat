@@ -1,4 +1,4 @@
-package com.example.whatssappmainactivitymock.project.composed_screens.chat_screens
+package com.example.whatssappmainactivitymock.project.screens
 
 import android.util.Log
 import androidx.compose.foundation.background
@@ -20,15 +20,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.whatssappmainactivitymock.R
-import com.example.whatssappmainactivitymock.project.composed_screens.*
+
+import com.example.whatssappmainactivitymock.project.screens.*
 import com.example.whatssappmainactivitymock.project.models.Chat
 import com.example.whatssappmainactivitymock.project.models.getAllChats
 import com.example.whatssappmainactivitymock.project.models.getFilteredChats
-import com.example.whatssappmainactivitymock.project.navigation.AppGraph.DETAILS
-import com.example.whatssappmainactivitymock.project.navigation.DetailsNavGraph
+import com.example.whatssappmainactivitymock.project.screens.chat_screens.BroadcastListAndNewGroup
+import com.example.whatssappmainactivitymock.project.screens.chat_screens.SearchField
+
 import me.onebone.toolbar.CollapsingToolbarScaffold
 import me.onebone.toolbar.ScrollStrategy
 import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
@@ -71,7 +72,7 @@ fun ChatsScreen(navController:NavHostController) {
                 ChatListLazyColumn(){
                     Log.d("TAG", it.user.firstName)
 
-                    navController.navigate(DETAILS)
+                    navController.navigate(DetailsScreens.ChatMessage.route)
                 }
             }
         }
