@@ -115,3 +115,4 @@ sealed class BottomBarScreen(
         icon = R.drawable.settings
     )
 }
+

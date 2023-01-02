@@ -1,12 +1,10 @@
 package com.example.whatssappmainactivitymock.project.graphs
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigation
-import com.example.whatssappmainactivitymock.project.screens.*
+import com.example.whatssappmainactivitymock.project.screens.register_and_login_screens.HomeScreen
 
 
 @Composable

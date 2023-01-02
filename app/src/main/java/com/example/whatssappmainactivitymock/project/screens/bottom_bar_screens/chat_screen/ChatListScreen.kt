@@ -1,4 +1,4 @@
-package com.example.whatssappmainactivitymock.project.screens
+package com.example.whatssappmainactivitymock.project.screens.bottom_bar_screens.chat_screen
 
 import android.util.Log
 import androidx.compose.foundation.background
@@ -41,7 +41,7 @@ var isFiltered = mutableStateOf(false)
 var isChatClicked = mutableStateOf(false)
 
 @Composable
-fun ChatsScreen(navController:NavHostController) {
+fun ChatsScreen(navController: NavHostController, message: String) {
 
     val state = rememberCollapsingToolbarScaffoldState()
     Column(modifier = Modifier.fillMaxWidth()) {
@@ -71,8 +71,8 @@ fun ChatsScreen(navController:NavHostController) {
             Column(Modifier.fillMaxSize()) {
                 ChatListLazyColumn(){
                     Log.d("TAG", it.user.firstName)
-
-                    navController.navigate(DetailsScreens.ChatMessage.route)
+                  navController.navigate(DetailsScreens.ChatMessage.withArgs(message))
+                   // navController.navigate(DetailsScreens.ChatMessage.route)
                 }
             }
         }

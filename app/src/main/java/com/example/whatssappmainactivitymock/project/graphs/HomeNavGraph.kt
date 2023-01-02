@@ -3,12 +3,15 @@ package com.example.whatssappmainactivitymock.project.graphs
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import com.example.whatssappmainactivitymock.project.screens.BottomBarScreen
+import androidx.navigation.navArgument
+
 import com.example.whatssappmainactivitymock.project.screens.*
-import com.example.whatssappmainactivitymock.project.screens.ChatsScreen
+import com.example.whatssappmainactivitymock.project.screens.bottom_bar_screens.BottomBarScreen
+import com.example.whatssappmainactivitymock.project.screens.bottom_bar_screens.chat_screen.ChatsScreen
 
 
 @Composable
@@ -32,8 +35,18 @@ fun HomeNavGraph(
             CommunityScreen()
         }
 
-        composable(route = BottomBarScreen.Chats.route) {
-            ChatsScreen(navController)
+        composable(route = BottomBarScreen.Chats.route,
+        arguments = listOf(
+
+            navArgument("chats"){
+                type= NavType.StringType
+                defaultValue="chat"
+                nullable=true
+            }
+        )
+            ) {
+            it.arguments?.getString("chats")?.let { it1 -> ChatsScreen(navController, it1) }
+
         }
 
         composable(route = BottomBarScreen.Settings.route) {

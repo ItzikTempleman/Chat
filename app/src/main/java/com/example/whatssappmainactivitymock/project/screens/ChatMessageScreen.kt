@@ -17,6 +17,15 @@ import com.example.whatssappmainactivitymock.R
 
 sealed class DetailsScreens(val route: String, val messages: List<String>) {
     object ChatMessage : DetailsScreens("Chat details", emptyList())
+
+    fun withArgs(vararg args: String): String {
+        return buildString {
+            append(route)
+            args.forEach { arg ->
+                append("/$arg")
+            }
+        }
+    }
 }
 
 @Composable

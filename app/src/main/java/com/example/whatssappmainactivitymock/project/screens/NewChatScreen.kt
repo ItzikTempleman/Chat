@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.whatssappmainactivitymock.R
+import com.example.whatssappmainactivitymock.project.screens.bottom_bar_screens.chat_screen.ContactListLazyColumn
 import com.example.whatssappmainactivitymock.project.screens.chat_screens.TitleBar
 import kotlinx.coroutines.launch
 
