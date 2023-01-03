@@ -71,8 +71,8 @@ fun ChatsScreen(navController: NavHostController, message: String) {
             Column(Modifier.fillMaxSize()) {
                 ChatListLazyColumn(){
                     Log.d("TAG", it.user.firstName)
-                  navController.navigate(DetailsScreens.ChatMessage.withArgs(message))
-                   // navController.navigate(DetailsScreens.ChatMessage.route)
+                        //navController.navigate(DetailsScreens.ChatMessage.withArgs(message))
+                    navController.navigate(DetailsScreens.ChatMessage.route)
                 }
             }
         }
